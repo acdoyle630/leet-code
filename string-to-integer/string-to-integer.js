@@ -40,4 +40,48 @@
 // Explanation: The number "-91283472332" is out of the range of a 32-bit signed integer.
 //              Thefore INT_MIN (−231) is returned.
 
-console.log(myAtoi('    -88893'))
+const myAtoi = (string) => {
+    const stringArray = string.split('')
+    for(var i = 0; i<stringArray.length; i++){
+        if(
+            acceptedChar(stringArray[i]) ||
+            stringArray[i] === '-' || 
+            stringArray[i] === '+'
+        ){
+            return stringArrayToNum(stringArray.splice(i))
+        } else if(
+            isNaN(stringArray[i])
+        ){
+            return 0
+        }
+    }
+    return 0
+} 
+
+const stringArrayToNum = (stringArray) => {
+    let result = stringArray[0]
+    for(var i = 1; i<stringArray.length; i++){
+        if(acceptedChar(stringArray[i])){
+            result += stringArray[i]
+        } else {
+            return confirmedResult(result)
+        }
+    }
+    return confirmedResult(result)
+}
+
+const confirmedResult = (num) => {
+    if(num < -2147483648) {
+        return -2147483648
+    } if (num > 2147483647){
+        return 2147483647
+    }
+    return isNaN(num) ? 0 : num
+}
+
+const acceptedChar = (char) => (
+    char !== ' ' &&
+    !isNaN(Number(char))
+)
+
+console.log(myAtoi('  +'))
