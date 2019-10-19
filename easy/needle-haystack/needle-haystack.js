@@ -1,4 +1,4 @@
-var strStr = function(haystack, needle) {
+const strStr = (haystack, needle) => {
     if(needle === haystack || needle === ''){
         return 0
     }
